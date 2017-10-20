@@ -6,7 +6,7 @@ a.button:hover, a.button:focus {
 #projects a.button:hover, #projects a.button:focus {
     color: #fff;
 }
-#about .download             { display: none; }
+/* #about .download             { display: none; } */
 #about #personal-description { display: none; }
 .fa-facebook-logo:before      { content: "\f09a"; }
 .fa-linkedin-logo:before      { content: "\f0e1"; }
