@@ -18,7 +18,7 @@ fetch('https://gist.githubusercontent.com/kcolford/5189fb174bd82e1c7381ff99dff68
 	for (var i = 0; i < elements.length; i++) {
 	    let a = elements[i];
 	    if (a.href == a.text) {
-		fetch(a.href.replace(/^http:/, "https:")
+		fetch(a.href.replace(/^http:/, "https:"))
 		    .then(res => {
 			if (res.ok) 
 			    return res.text();
