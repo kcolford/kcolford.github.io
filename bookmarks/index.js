@@ -6,7 +6,8 @@ fetch('https://gist.githubusercontent.com/kcolford/5189fb174bd82e1c7381ff99dff68
 	    throw new Error(res);
     })
     .then(res => {
-	document.getElementById('content').innerHTML = (new Remarkable()).render(res);
+	var html = (new showdown.Converter({rawHeaderId: true})).makeHtml(res);
+	document.getElementById('content').innerHTML = html;
     })
     .catch(console.log)
 
