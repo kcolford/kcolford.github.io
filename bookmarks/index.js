@@ -12,27 +12,19 @@ function fetch_better(url) {
 }
 
 function reload_links() {
-  var elements = document.getElementsByTagName("a");
-  for (var i = 0; i < elements.length; i++) {
-    (function() {
-      var a = elements[i];
+  return Promise.all(
+    document.getElementsByTagName("a").map(a => {
       if (a.href == a.text) {
-        fetch(a.href.replace(/^http:/, "https:"))
-          .then(res => {
-            if (res.ok) return res.text();
-            else throw new Error(res);
-          })
-          .then(res => {
-            var html = document.createElement("html");
-            html.innerHTML = res;
-            var titles = html.getElementsByTagName("title");
-            a.text = titles[0].text;
-            console.log("replaced", a.href, "with", a.text);
-          })
-          .catch(console.log);
+        return fetch_better(a.href.replace(/^http:/, "https:")).then(res => {
+          var html = document.createElement("html");
+          html.innerHTML = res;
+          var titles = html.getElementsByTagName("title");
+          a.text = titles[0].text;
+          console.log("replaced", a.href, "with", a.text);
+        });
       }
-    })();
-  }
+    })
+  );
 }
 
 function render_markdown(mkdown) {
