@@ -1,48 +1,62 @@
-(function(){
+fetch_better(
+  "https://gist.githubusercontent.com/kcolford/5189fb174bd82e1c7381ff99dff68dcb/raw/bookmarks.md"
+)
+  .then(render_markdown)
+  .then(reload_links);
 
-    var path = 'https://gist.githubusercontent.com/kcolford/5189fb174bd82e1c7381ff99dff68dcb/raw/bookmarks.md';
-    var c = fetch(path).then(res => {
-	if (res.ok)
-	    return res.text();
-	else
-	    throw new Error(res);
-    }).then(res => {
-	var html = (new showdown.Converter({rawHeaderId: true})).makeHtml(res);
-	document.getElementById('content').innerHTML = html;
-    }).catch(console.log);
-    
-    // A little routine to cleanup any exposed urls, it won't work
-    // unless the targets allow CORS access though.
-    c.then(() => {
-	var elements = document.getElementsByTagName('a');
-	for (var i = 0; i < elements.length; i++) {
-	    let a = elements[i];
-	    if (a.href == a.text) {
-		fetch(a.href.replace(/^http:/, "https:"))
-		    .then(res => {
-			if (res.ok) 
-			    return res.text();
-			else
-			    throw new Error(res);
-		    })
-		    .then(res => {
-			var html = document.createElement('html');
-			html.innerHTML = res;
-			var titles = html.getElementsByTagName('title');
-			a.text = titles[0].text;
-			console.log('replaced', a.href, 'with', a.text);
-		    })
-		    .catch(console.log)
-		;
-	    }
-	}
-    }).catch(console.log);
+function fetch_better(url) {
+  return fetch(url, arguments[1]).then(res => {
+    if (res.ok) return res.text();
+    return Promise.reject(res.status);
+  });
+}
 
-    // return the user to their hash location
-    c.then(() => {
-	location.hash = location.hash;
+function reload_links() {
+  var elements = document.getElementsByTagName("a");
+  for (var i = 0; i < elements.length; i++) {
+    (function() {
+      var a = elements[i];
+      if (a.href == a.text) {
+        fetch(a.href.replace(/^http:/, "https:"))
+          .then(res => {
+            if (res.ok) return res.text();
+            else throw new Error(res);
+          })
+          .then(res => {
+            var html = document.createElement("html");
+            html.innerHTML = res;
+            var titles = html.getElementsByTagName("title");
+            a.text = titles[0].text;
+            console.log("replaced", a.href, "with", a.text);
+          })
+          .catch(console.log);
+      }
+    })();
+  }
+}
+
+function render_markdown(mkdown) {
+  return load(
+    "https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js"
+  )
+    .then(() => {
+      return mkdown;
+    })
+    .then(res => {
+      var html = new showdown.Converter().makeHtml(res);
+      document.getElementById("content").innerHTML = html;
+
+      // build a table of contents
+      var toc = document
+        .getElementById("content")
+        .appendChild(document.createElement("ul"));
+      var headers = document.getElementsByTagName("h2");
+      for (var i = 0; i < headers.length; i++) {
+        var a = toc
+          .appendChild(document.createElement("li"))
+          .appendChild(document.createElement("a"));
+        a.href = "#" + headers[i].id;
+        a.textContent = headers[i].textContent;
+      }
     });
-    
-})();
-
-    
+}
