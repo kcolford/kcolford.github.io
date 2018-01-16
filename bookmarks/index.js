@@ -2,7 +2,9 @@ fetch_better(
   "https://gist.githubusercontent.com/kcolford/5189fb174bd82e1c7381ff99dff68dcb/raw/bookmarks.md"
 )
   .then(render_markdown)
-  .then(reload_links);
+  .then(reload_links)
+  .then(Promise.all)
+  .catch(console.log);
 
 function fetch_better(url) {
   return fetch(url, arguments[1]).then(res => {
@@ -12,19 +14,17 @@ function fetch_better(url) {
 }
 
 function reload_links() {
-  return Promise.all(
-    document.getElementsByTagName("a").map(a => {
-      if (a.href == a.text) {
-        return fetch_better(a.href.replace(/^http:/, "https:")).then(res => {
-          var html = document.createElement("html");
-          html.innerHTML = res;
-          var titles = html.getElementsByTagName("title");
-          a.text = titles[0].text;
-          console.log("replaced", a.href, "with", a.text);
-        });
-      }
-    })
-  );
+  return Array.from(document.getElementsByTagName("a")).map(a => {
+    if (a.href == a.text) {
+      return fetch_better(a.href.replace(/^http:/, "https:")).then(res => {
+        var html = document.createElement("html");
+        html.innerHTML = res;
+        var titles = html.getElementsByTagName("title");
+        a.text = titles[0].text;
+        console.log("replaced", a.href, "with", a.text);
+      });
+    }
+  });
 }
 
 function render_markdown(mkdown) {
