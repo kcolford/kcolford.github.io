@@ -2,6 +2,7 @@ fetch_better(
   "https://gist.githubusercontent.com/kcolford/5189fb174bd82e1c7381ff99dff68dcb/raw/bookmarks.md"
 )
   .then(render_markdown)
+  .then(build_toc)
   .then(reload_links)
   .then(Promise.all)
   .catch(console.log);
@@ -18,6 +19,7 @@ function reload_links() {
     if (a.href == a.text) {
       return fetch_better(a.href.replace(/^http:/, "https:")).then(res => {
         var html = document.createElement("html");
+        console.log(res);
         html.innerHTML = res;
         var titles = html.getElementsByTagName("title");
         a.text = titles[0].text;
@@ -37,18 +39,20 @@ function render_markdown(mkdown) {
     .then(res => {
       var html = new showdown.Converter().makeHtml(res);
       document.getElementById("content").innerHTML = html;
-
-      // build a table of contents
-      var toc = document
-        .getElementById("content")
-        .appendChild(document.createElement("ul"));
-      var headers = document.getElementsByTagName("h2");
-      for (var i = 0; i < headers.length; i++) {
-        var a = toc
-          .appendChild(document.createElement("li"))
-          .appendChild(document.createElement("a"));
-        a.href = "#" + headers[i].id;
-        a.textContent = headers[i].textContent;
-      }
     });
+}
+
+function build_toc() {
+  // build a table of contents
+  var toc = document
+    .getElementsByTagName("p")[0]
+    .appendChild(document.createElement("ul"));
+  var headers = document.getElementsByTagName("h2");
+  for (var i = 0; i < headers.length; i++) {
+    var a = toc
+      .appendChild(document.createElement("li"))
+      .appendChild(document.createElement("a"));
+    a.href = "#" + headers[i].id;
+    a.textContent = headers[i].textContent;
+  }
 }
