@@ -15,6 +15,7 @@ function fetch_better(url) {
 }
 
 function reload_links() {
+  return null;
   return Array.from(document.getElementsByTagName("a")).map(a => {
     if (a.href == a.text) {
       return fetch_better(a.href.replace(/^http:/, "https:")).then(res => {
