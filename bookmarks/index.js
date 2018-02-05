@@ -27,6 +27,7 @@ function reload_links() {
         console.log("replaced", a.href, "with", a.text);
       });
     }
+    return Promise.resolve();
   });
 }
 
@@ -39,7 +40,7 @@ function render_markdown(mkdown) {
     })
     .then(res => {
       var html = new showdown.Converter().makeHtml(res);
-      document.getElementById("content").innerHTML = html;
+      document.getElementsByTagName("main")[0].innerHTML = html;
     });
 }
 
@@ -47,6 +48,7 @@ function build_toc() {
   // build a table of contents
   var toc = document
     .getElementsByTagName("p")[0]
+    .appendChild(document.createElement("nav"))
     .appendChild(document.createElement("ul"));
   var headers = document.getElementsByTagName("h2");
   for (var i = 0; i < headers.length; i++) {
