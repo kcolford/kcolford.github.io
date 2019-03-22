@@ -1,0 +1,68 @@
+==================================================================
+https://keybase.io/kcolford
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://kcolford.com
+  * I am kcolford (https://keybase.io/kcolford) on keybase.
+  * I have a public key with fingerprint DFC1 197D 150B 1194 81D1  1ADC 9E77 80CC 8113 6BED
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0101a941d0cddd1cdfc38bf8f1c91f5d4fbb38d983c18157e22794aa9836fcd235420a",
+      "fingerprint": "dfc1197d150b119481d11adc9e7780cc81136bed",
+      "host": "keybase.io",
+      "key_id": "9e7780cc81136bed",
+      "kid": "0101a941d0cddd1cdfc38bf8f1c91f5d4fbb38d983c18157e22794aa9836fcd235420a",
+      "uid": "4623de29258f567fb414675dc5375c19",
+      "username": "kcolford"
+    },
+    "service": {
+      "hostname": "kcolford.com",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1553265641,
+  "expire_in": 157680000,
+  "prev": "a2e510cb74f071e6cde48aa784385c1d553b37c5583ca220171b68a89f43b3f4",
+  "seqno": 16,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.1.0
+Comment: https://keybase.io/crypto
+
+yMIfAnicrZJbSBVBGMePqV2OSaFFPiTZYCF1sJ3dmb0co5eIPPZQDxVRRw+7M7O2
+nTx72rOaJidFkCCUHsosKCqL6EalIQUGlRRdoaKrXSgPRBgohBkiac1KvUSPzcvO
+fPP///b/fczt7HSfP21p+arWVKqoKO3hrUPVvvCB4YF6YNi0DgTrQZRNfth2yhJu
+JGpREAQCFKCuIUgFQimFhJpEUg1TNSHRoIkpMg1DUqmmSgSqECtMFBUN6TovyCah
+ooSRKOggAEwrVsmcuGPFXI7lGAg1hUIsGHyDVEgh1CnRmKKoAiEqhJJsMMqNW+2E
+5+DhDD3Bii2b1/ghMhnvH/r/nLt6EodkUaJM1ESsmlhWTANBJCuYEiwpmEDNEyaY
+E9OrmJeV2NtN26EgGQC8WmMR5g3W6+QvRTGxq7g37tiuzUv8ZqvrxhNBz+nWxT3p
+TmZEfkMihhWjfI7cUcOchGXHQBByJXEtjwoxlkQZywgGAKuNWw6LWJ4CK7Iq8OX9
+h9VwpC4yDAViKMgUFMhkQhlSdV1RkaTybijnGJJCMObT0UVRgAo0ZFVXNRPxCxMB
+r60dMZuzZZ5Tr+TMhFUZ091qh4Fk781whi/N75uaOcV7YD7/jNl/nl3Ime7b23zn
+0Y3cwRMvV8L97Hh628ycDSef5Bt50c1T8Ze2F/2fqmZtfD8RKrj8eXFv34WGZXjU
+Hi0LNbb0h9sKNoSfuY/GBrIG42vyTtzvXfx43q7zKXS8oKNk/b38nqO94MomoA2f
++vGxMdnTDt5uvEiKr78cyUc1m3JpZglzcN84yupbbr+uX3esqXy8I7t/LNW19lRL
+Oj7XuaJx21V/8kx39APK9g2JypZXnc1NB5tC+aenLUrNXb07dnZO4deS7tq4uWQw
+/rOjfWHp3ciDVWWFRyreP33+vXD+vvZZGRVD7y61BjIurt5T+rQMXVuQYyQbg4fz
+wgPfzBG2reFq15uJ7l/QEkF2
+=xS3Z
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/kcolford
+
+==================================================================
